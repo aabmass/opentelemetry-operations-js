@@ -28,10 +28,12 @@ npm install
 Bump the package versions with:
 
 ```bash
-lerna publish --skip-npm --skip-git
+lerna publish --skip-npm --skip-git && lerna exec -- npm instal 
 ```
 
-Ensure that the version being bumped to is `x.y.z`. This should create some unstaged changes.
+Run `npm install` one more time to update `package-lock.json` with changes
+from the publish command. Ensure that the version being bumped to is `x.y.z`.
+This should create some unstaged changes.
 
 ## Create a new commit
 
