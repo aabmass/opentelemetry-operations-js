@@ -9,7 +9,7 @@
     "codecov": "nyc report --reporter=json && codecov -f coverage/*.json -p ../../",
     "lint": "gts lint",
     "clean": "gts clean",
-    "compile": "tsc",
+    "compile": "ttsc",
     "prepare": "npm run compile",
     "test": "nyc ts-mocha -p tsconfig.json 'test/**/*.test.ts'",
     "fix": "gts fix",
@@ -53,7 +53,9 @@
     "rimraf": "3.0.2",
     "sinon": "11.1.1",
     "ts-mocha": "8.0.0",
-    "typescript": "4.3.2"
+    "ttypescript": "^1.5.12",
+    "typescript": "4.3.2",
+    "typescript-transform-macros": "^1.1.1"
   },
   "dependencies": {
     "@google-cloud/opentelemetry-resource-util": "^0.9.0",

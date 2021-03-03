@@ -12,4 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export const VERSION = '0.9.0';
+declare function jsonLiteral(filePath: string, jsonPath: string): void;
+export const VERSION = jsonLiteral('../package.json', 'version');
