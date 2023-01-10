@@ -4,12 +4,10 @@
   "description": "OpenTelemetry is a distributed tracing and stats collection framework.",
   "scripts": {
     "clean": "lerna run clean",
-    "postinstall": "npm run bootstrap",
     "precompile": "tsc --version",
     "compile": "lerna run compile",
     "codecov": "lerna run codecov",
     "test": "lerna run test",
-    "bootstrap": "lerna bootstrap",
     "lint": "lerna run lint",
     "fix": "lerna run fix",
     "create-release-tags": "node scripts/create-release-tags.js"
@@ -32,5 +30,8 @@
   },
   "devDependencies": {
     "lerna": "6.4.0"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

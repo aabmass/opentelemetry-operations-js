@@ -11,11 +11,11 @@
     "clean": "gts clean",
     "precompile": "node ../../scripts/version-update.js",
     "compile": "tsc",
-    "prepare": "npm run compile",
+    "prepublish": "npm run compile",
     "test": "nyc ts-mocha -p tsconfig.json 'test/**/*.test.ts'",
     "update-snapshot-tests": "SNAPSHOT_UPDATE=1 npm run test",
     "fix": "gts fix",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
   },
   "keywords": [
     "opentelemetry",

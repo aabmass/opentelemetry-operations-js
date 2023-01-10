@@ -1,10 +1,23 @@
 {
-  "packages": ["packages/*", "samples/*", "e2e-test-server"],
-  "ignoreChanges": ["**/test/**", "**/*.md", "**/package-lock.json"],
+  "packages": [
+    "packages/*",
+    "samples/*",
+    "e2e-test-server"
+  ],
+  "ignoreChanges": [
+    "**/test/**",
+    "**/*.md",
+    "**/package-lock.json"
+  ],
   "version": "independent",
   "command": {
     "publish": {
       "registry": "https://wombat-dressing-room.appspot.com"
+    },
+    "init": {
+      "exact": true
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useWorkspaces": true
 }
