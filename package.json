@@ -36,6 +36,7 @@
     "packages/*",
     "samples/*",
     "e2e-test-server",
-    "scripts"
+    "scripts",
+    "../opentelemetry-js/packages/sdk-metrics/"
   ]
 }

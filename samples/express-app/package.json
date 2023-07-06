@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-example-express-app",
+  "version": "0.17.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": "GoogleCloudPlatform/opentelemetry-operations-js",
+  "dependencies": {
+    "@google-cloud/opentelemetry-cloud-monitoring-exporter": "^0.17.0",
+    "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.1.0",
+    "@google-cloud/opentelemetry-resource-util": "^2.1.0",
+    "@opentelemetry/api": "1.4.1",
+    "@opentelemetry/core": "file:../../../opentelemetry-js/packages/opentelemetry-core",
+    "@opentelemetry/instrumentation-express": "^0.32.4",
+    "@opentelemetry/instrumentation-http": "^0.41.0",
+    "@opentelemetry/resources": "1.15.0",
+    "@opentelemetry/sdk-metrics": "1.15.0",
+    "@opentelemetry/sdk-node": "^0.41.0",
+    "express": "^4.18.2",
+    "serve-index": "^1.9.1"
+  }
+}
