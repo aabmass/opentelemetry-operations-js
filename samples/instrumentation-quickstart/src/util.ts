@@ -32,6 +32,9 @@ interface LogRecord {
   trace_id?: string;
   span_id?: string;
   trace_flags?: string;
+  err?: {
+    stack?: string;
+  };
   [key: string]: unknown;
 }
 
@@ -55,7 +58,7 @@ export const loggerConfig = {
     log(object: LogRecord): Record<string, unknown> {
       // Add trace context attributes following Cloud Logging structured log format described
       // in https://cloud.google.com/logging/docs/structured-logging#special-payload-fields
-      const {trace_id, span_id, trace_flags, ...rest} = object;
+      const {trace_id, span_id, trace_flags, err, ...rest} = object;
 
       return {
         'logging.googleapis.com/trace': trace_id,
@@ -63,6 +66,7 @@ export const loggerConfig = {
         'logging.googleapis.com/trace_sampled': trace_flags
           ? trace_flags === '01'
           : undefined,
+        stack_trace: err?.stack,
         ...rest,
       };
     },

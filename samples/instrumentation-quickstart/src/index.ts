@@ -34,7 +34,16 @@ fastify.get('/single', async request => {
   // Sleep between 100-200 milliseconds
   const sleepMillis = randInt(100, 200);
   request.log.info({sleepMillis}, 'Going to sleep');
+
   await sleep(sleepMillis);
+
+  // Sometimes throw an exception
+  if (randInt(0, 10) === 0) {
+    throw new (class MyError extends Error {})(
+      'oh no randomly throwing an error'
+    );
+  }
+
   return `slept ${sleepMillis}\n`;
 });
 // [END opentelemetry_instrumentation_handle_single]
