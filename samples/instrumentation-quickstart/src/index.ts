@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 import Fastify from 'fastify';
 import {loggerConfig, randInt, sleep} from './util';
+import pino from 'pino';
 
 const port = 8080;
 
@@ -34,16 +35,7 @@ fastify.get('/single', async request => {
   // Sleep between 100-200 milliseconds
   const sleepMillis = randInt(100, 200);
   request.log.info({sleepMillis}, 'Going to sleep');
-
   await sleep(sleepMillis);
-
-  // Sometimes throw an exception
-  if (randInt(0, 10) === 0) {
-    throw new (class MyError extends Error {})(
-      'oh no randomly throwing an error'
-    );
-  }
-
   return `slept ${sleepMillis}\n`;
 });
 // [END opentelemetry_instrumentation_handle_single]
@@ -60,11 +52,37 @@ fastify.get('/multi', async request => {
   request.log.info({subRequests}, 'handle /multi request');
 
   for (let i = 0; i < subRequests; i++) {
-    await axios.get(`http://localhost:${port}/single`);
+    await withRetry(
+      async () => await axios.get(`http://localhost:${port}/single`),
+      request.log
+    );
   }
   return 'ok';
 });
 // [END opentelemetry_instrumentation_handle_multi]
+
+async function withRetry<T>(
+  func: () => Promise<T>,
+  logger: pino.BaseLogger
+): Promise<T> {
+  const maxRetries = 3;
+
+  for (let i = 0; i < maxRetries - 1; i++) {
+    try {
+      return await func();
+    } catch (err: unknown) {
+      const axiosErr = err as AxiosError;
+      if (axiosErr.status != 500) {
+        // rethrow
+        throw err;
+      }
+
+      logger.warn({err}, 'Request failed, but retrying for the %s time', i + 1);
+    }
+  }
+
+  return await func();
+}
 
 async function main() {
   try {

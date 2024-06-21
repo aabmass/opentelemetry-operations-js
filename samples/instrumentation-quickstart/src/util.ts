@@ -14,8 +14,18 @@
 
 import type {LoggerOptions} from 'pino';
 
-export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function coinFlip(probability: number): boolean {
+  return Math.random() < probability;
+}
+
+export class OccaisonalError extends Error {}
+
+export async function sleep(ms: number): Promise<void> {
+  await new Promise(resolve => setTimeout(resolve, ms));
+  // Simulate occaisional errors 2% of the time
+  if (coinFlip(0.02)) {
+    throw new OccaisonalError('Did not sleep well');
+  }
 }
 
 /**
