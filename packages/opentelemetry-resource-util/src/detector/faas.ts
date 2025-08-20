@@ -26,11 +26,11 @@ const FAAS_SERVICE_ENV = 'K_SERVICE';
 const FAAS_REVISION_ENV = 'K_REVISION';
 const REGION_METADATA_ATTR = 'region';
 
-export async function onCloudRun(): Promise<boolean> {
+export function onCloudRun(): boolean {
   return process.env[CLOUD_RUN_CONFIG_ENV] !== undefined;
 }
 
-export async function onCloudFunctions(): Promise<boolean> {
+export function onCloudFunctions(): boolean {
   return process.env[CLOUD_FUNCTION_TARGET_ENV] !== undefined;
 }
 

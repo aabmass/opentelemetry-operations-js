@@ -24,7 +24,7 @@ const KUBERNETES_SERVICE_HOST_ENV = 'KUBERNETES_SERVICE_HOST';
 const CLUSTER_NAME_METADATA_ATTR = 'attributes/cluster-name';
 const CLUSTER_LOCATION_METADATA_ATTR = 'attributes/cluster-location';
 
-export async function onGke(): Promise<boolean> {
+export function onGke(): boolean {
   return process.env[KUBERNETES_SERVICE_HOST_ENV] !== undefined;
 }
 

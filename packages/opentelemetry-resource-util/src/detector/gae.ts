@@ -28,11 +28,11 @@ const GAE_ENV = 'GAE_ENV';
 const GAE_STANDARD = 'standard';
 const ZONE_METADATA_ATTR = 'zone';
 
-export async function onAppEngineStandard(): Promise<boolean> {
+export function onAppEngineStandard(): boolean {
   return process.env[GAE_ENV] === GAE_STANDARD;
 }
 
-export async function onAppEngine(): Promise<boolean> {
+export function onAppEngine(): boolean {
   return process.env[GAE_SERVICE_ENV] !== undefined;
 }
 
@@ -40,7 +40,7 @@ export async function onAppEngine(): Promise<boolean> {
  * The service name of the app engine service. Check that {@link onAppEngine()} is true before
  * calling this, or it may throw exceptions.
  */
-export async function serviceName(): Promise<string> {
+export function serviceName(): string {
   return lookupEnv(GAE_SERVICE_ENV);
 }
 
@@ -48,7 +48,7 @@ export async function serviceName(): Promise<string> {
  * The service version of the app engine service. Check that {@link onAppEngine()} is true
  * before calling this, or it may throw exceptions.
  */
-export async function serviceVersion(): Promise<string> {
+export function serviceVersion(): string {
   return lookupEnv(GAE_VERSION_ENV);
 }
 
@@ -56,7 +56,7 @@ export async function serviceVersion(): Promise<string> {
  * The service instance of the app engine service. Check that {@link onAppEngine()} is true
  * before calling this, or it may throw exceptions.
  */
-export async function serviceInstance(): Promise<string> {
+export function serviceInstance(): string {
   return lookupEnv(GAE_INSTANCE_ENV);
 }
 
